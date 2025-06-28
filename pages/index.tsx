@@ -65,6 +65,10 @@ export default function Home() {
       console.log("Data Results!", data.results[1])
     fetchTransactions(data.results[0]?.id)
     console.log("Transactions OK!")
+    buscaInvestimentos()
+    console.log("Investimentos OK!")
+    buscaRendimentos()
+    console.log("Rendimentos OK!")
     }
     
   }
@@ -79,6 +83,28 @@ export default function Home() {
 
     const dataTransactions = await transactions.json()
     console.log("Transacoes:", dataTransactions)
+  }
+
+  const buscaInvestimentos = async () => {
+    const investimentos = await fetch('/api/buscaInvestimentos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ itemId: itauId }),
+    })
+
+    const dadosInvestimentos = await investimentos.json()
+    console.log("Investimentos:", dadosInvestimentos)
+  }
+
+  const buscaRendimentos = async () => {
+    const rendimentos = await fetch('/api/buscaRendimentos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ itemId: itauId }),
+    })
+
+    const dadosRendimentos = await rendimentos.json()
+    console.log("Rendimentos:", dadosRendimentos)
   }
 
   useEffect(() => {
